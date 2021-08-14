@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="es-AR" xmlns:th="https://wwww.thymeleaf.org">
+    <head th:replace="/fragments/head :: head">
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="@{/}">CREAR LIBRO</a>
+            </div>
+        </nav>
+        <button><a th:href="@{/libro/list}">Ver lista de libros</a></button>
+        <br>
+        <form th:action="@{/libro/save}" method="POST">
+            <div>Crear Libro</div>
+            <label>ISBN</label>
+            <input type="number" name="isbn">
+            <br>
+            <label>Titulo</label>
+            <input type="text" name="titulo">
+            <br>
+            <label>Anio</label>
+            <input type="number" name="anio">
+            <br>
+            <label>Ejemplares</label>
+            <input type="number" name="ejemplares">
+            <br>
+            <label>Prestados</label>
+            <input type="number" name="prestados">
+            <br>
+            <input type="submit">
+        </form>
+    </body>
+</html>

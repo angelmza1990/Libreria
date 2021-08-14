@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html lang="es-AR" xmlns:th="https://wwww.thymeleaf.org">
+    <head th:replace="/fragments/head :: head">
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="@{/}">REALIZAR PRÉSTAMO</a>
+            </div>
+        </nav>
+        <button><a th:href="@{/prestamo/list}">Ver lista de prestamos</a></button>
+        <br>
+        <form th:action="@{/prestamo/save}" method="POST">
+            <div>Crear prestamo</div>
+            <label>Id</label>
+            <input type="text" name="id">
+            <br>
+            <label>Fecha</label>
+            <input type="text" name="fecah">
+            <br>
+            <label>Devolucion</label>
+            <input type="number" name="devolucion">
+            <br>
+            <label>Multa</label>
+            <input type="number" name="multa">
+            <br>
+            <input type="submit">
+        </form>
+    </body>
+</html>

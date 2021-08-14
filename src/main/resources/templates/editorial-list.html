@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="es-AR" xmlns:th="https://wwww.thymeleaf.org">
+    <head th:replace="/fragments/head :: head">
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="@{/}">LISTA EDITORIAL</a>
+            </div>
+        </nav>
+        <button><a th:href="@{/editorial/form}">Crear editorial</a></button>
+        <table>
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Id</th>
+                    <th>Editorial</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each=" p,iterator : ${editoriales} ">
+                    <td th:text="${iterator.index+1}"></td>
+                    <td th:text="${p.id}"></td>
+                    <td th:text="${p.nombre}"></td>                    
+                </tr>
+            </tbody>
+            <p th:if="${editoriales.isEmpty}"> No hay editoriales para mostrar</p>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="es-AR" xmlns:th="https://wwww.thymeleaf.org">
+    <head th:replace="/fragments/head :: head">
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="@{/}">LISTA CLIENTE</a>
+            </div>
+        </nav>
+        <button><a th:href="@{/cliente/form}">Crear cliente</a></button>
+        <table>
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Documento</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Docimilio</th>
+                    <th>Telefono</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each=" p,iterator : ${clientes} ">
+                    <td th:text="${iterator.index+1}"></td>
+                    <td th:text="${p.documento}"></td>
+                    <td th:text="${p.nombre}"></td>
+                    <td th:text="${p.apellido}"></td>
+                    <td th:text="${p.domicilio}"></td>
+                    <td th:text="${p.telefono}"></td>
+                </tr>
+            </tbody>
+            <p th:if="${clientes.isEmpty}"> No hay clientes para mostrar</p>
+        </table>
+    </body>
+</html>
