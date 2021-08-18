@@ -5,7 +5,10 @@
  */
 package com.egg.libreria1.controladores;
 
+import com.egg.libreria1.entidades.Libro;
+import com.egg.libreria1.servicios.AutorServicio;
 import com.egg.libreria1.servicios.LibroServicio;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +25,10 @@ public class LibroController {
     @Autowired
     private LibroServicio libroServicio;
     
+    @Autowired
+    private AutorServicio autorServicio;
+    
+    
     @GetMapping("/list")
     public String listarLibros(Model model){
         model.addAttribute("libros", libroServicio.listAll());
@@ -29,7 +36,18 @@ public class LibroController {
     }
     
     @GetMapping("/form")
-    public String crearLibro(){
+    public String crearLibro(Model model, @RequestParam(required = false) String id){
+        if(id != null) {
+            Optional<Libro> optional = libroServicio.findById(id);
+            if(optional.isPresent()){
+                model.addAttribute("libro", optional.get());
+            }else{
+                return "redirect:/libro/list";
+            }
+        }else {
+            model.addAttribute("libro", new Libro());
+        }
+        model.addAttribute("autores", autorServicio.listAll());
         return "libro-form";
     }
     

@@ -22,7 +22,8 @@ and open the template in the editor.
                     <th>N°</th>
                     <th>ISBN</th>
                     <th>Titulo</th>
-                    <th>Anio</th>
+                    <th>Año</th>
+                    <th>Autor</th>
                     <th>Ejemplares</th>
                     <th>Prestados</th>
                 </tr>
@@ -33,6 +34,7 @@ and open the template in the editor.
                     <td th:text="${p.isbn}"></td>
                     <td th:text="${p.titulo}"></td>
                     <td th:text="${p.anio}"></td>
+                    <td th:text="${p.autor}==null ? 'No tiene autor' : ${p.autor.nombre}"></td>
                     <td th:text="${p.ejemplares}"></td>
                     <td th:text="${p.prestados}"></td>
                 </tr>

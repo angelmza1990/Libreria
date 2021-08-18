@@ -18,6 +18,9 @@ public class AutorServicio {
     @Autowired
     private AutorRepository autorRepository;
     
+    @Autowired
+    private LibroServicio libroServicio;
+    
     @Transactional
     public void registrarAutor (String nombre) throws ErrorServicio{
         validarAutor(nombre);
@@ -55,10 +58,21 @@ public class AutorServicio {
         return autorRepository.findById(id);
     }
     
+    public List<Autor> findAllByQ(String q){
+        return autorRepository.findAllByQ("%"+q+"%");
+    }
+    
     @Transactional
     public Autor save(String id, String nombre){
         Autor autor = new Autor();
         autor.setId(id);
+        autor.setNombre(nombre);
+        return autorRepository.save(autor);
+    }
+    
+    @Transactional 
+    public Autor save(String nombre){
+        Autor autor = new Autor();
         autor.setNombre(nombre);
         return autorRepository.save(autor);
     }
@@ -71,6 +85,19 @@ public class AutorServicio {
         return autorRepository.save(autor);
     }
     
+//    @Transactional
+//    public Autor saveByLibro(Autor autor) throws ErrorServicio{
+//        if (autor.getId().isEmpty() || autor.getId()==null){
+//            throw new ErrorServicio("Ocurrió un error al querer guardar la ciudad");
+//        }else {
+//            Optional<Autor> optional = autorRepository.findById(autor.getId());
+//            if(optional.isPresent()){
+//                autor = optional.get();
+//            }
+//        }
+//        return autorRepository.save(autor);
+//    }
+    
     
     public List<Autor> listAll() {
         return autorRepository.findAll();
@@ -80,11 +107,20 @@ public class AutorServicio {
         return autorRepository.findAllByQ("%"+q+"%");
     }
     
+    public Autor findById(Autor autor){
+        Optional<Autor> optional = autorRepository.findById(autor.getId());
+        if(optional.isPresent()){
+            autor = optional.get();
+        }
+        return autor;
+    }
+    
    
     
     
     @Transactional
     public void delete (Autor autor){
+        
         autorRepository.delete(autor);
     }
     
@@ -93,7 +129,9 @@ public class AutorServicio {
     public void deleteById (String id){
         Optional<Autor> optional = autorRepository.findById(id);
         if (optional.isPresent()){
-            autorRepository.delete(optional.get());
+            Autor autor = optional.get();
+            libroServicio.deleteFieldAutor(autor);
+            autorRepository.delete(autor);
         }
         
     }
@@ -101,3 +139,6 @@ public class AutorServicio {
     
     
 }
+
+
+    

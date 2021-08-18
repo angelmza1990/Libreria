@@ -24,6 +24,12 @@ and open the template in the editor.
             <label>Titulo</label>
             <input type="text" name="titulo">
             <br>
+            <label>Autor</label>
+            <select class="form-select" th:field="*{autor.id}">
+                <option th:each="c : ${autores}" th:text="${c.nombre}" th:value="${c.id}"> </option> 
+            </select>
+           
+            <br>
             <label>Anio</label>
             <input type="number" name="anio">
             <br>

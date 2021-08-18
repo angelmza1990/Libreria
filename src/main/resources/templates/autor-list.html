@@ -31,10 +31,10 @@ and open the template in the editor.
                 <div class="card-body">
                     <h5 class="card-title">Lista de Autores</h5>
 
-                    <form class="row g-3" th:action="@{/autor/list}" method="POST">
+                    <form class="row g-3" th:action="@{/autor/list}" method="GET">
                         <div class="col-auto">
                             
-                            <input type="text" name="q" placeholder="Buscar ... ">
+                            <input type="text" style="width:100%" name="q" placeholder="Buscar ... ">
                         </div>
                         <div class="col-auto">
                             <button type="submit" class="btn btn-primary mb-3">Buscar</button>
@@ -58,12 +58,12 @@ and open the template in the editor.
                                 <td th:text="${p.id}"></td>
                                 <td th:text="${p.nombre}"></td>
                                 <td>
-                                    <button class="btn-dark"><a th:href="@{/autor/delete?}+'?id='+${p.id}" class =" px-5 py-2">  Eliminar </a> </button>
-                                    <button class="btn-dark"><a th:href="@{/autor/form?}+'?id='+${p.id}" class =" px-5 py-2 ">Editar </a></button>
+                                    <button class="btn-dark"><a th:href="@{/autor/delete}+'?id='+${p.id}" class =" px-5 py-2">  Eliminar </a> </button>
+                                    <button class="btn-dark"><a th:href="@{/autor/form}+'?id='+${p.id}" class =" px-5 py-2 ">Editar </a></button>
                                 </td>
                             </tr>
                         </tbody>
-                        <p th:if="${autores.isEmpty}"> No hay autores para mostrar</p>
+                        <p th:if="${autores.isEmpty}"> No hay autores para mostrar con esas letras</p>
                     </table>
 
                 </div>
