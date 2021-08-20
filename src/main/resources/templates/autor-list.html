@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="es-AR" xmlns:th="https://wwww.thymeleaf.org">
+    <head th:replace="/fragments/head :: head">
+
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+            <div th:if="${error}"  class="alert alert-danger alert-dismissible fade show" role="alert">
+                <span th:text="${error}" ></span> 
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+                <span th:text="${success}" ></span> 
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <div class="container-fluid">
+                <a class="navbar-brand" href="@{/}">LISTA AUTOR</a>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    Lista autores 
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Lista de Autores</h5>
+
+                    <form class="row g-3" th:action="@{/autor/list}" method="GET">
+                        <div class="col-auto">
+                            
+                            <input type="text" style="width:100%" name="q" placeholder="Buscar ... ">
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+                        </div>
+                    </form>
+                    <table class="table table-dark table-striped">
+
+
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each=" p,iterator : ${autores} ">
+                                <td th:text="${iterator.index+1}"></td>
+                                <td th:text="${p.id}"></td>
+                                <td th:text="${p.nombre}"></td>
+                                <td>
+                                    <button class="btn-dark"><a th:href="@{/autor/delete}+'?id='+${p.id}" class =" px-5 py-2">  Eliminar </a> </button>
+                                    <button class="btn-dark"><a th:href="@{/autor/form}+'?id='+${p.id}" class =" px-5 py-2 ">Editar </a></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <p th:if="${autores.isEmpty}"> No hay autores para mostrar con esas letras</p>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

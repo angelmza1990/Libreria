@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="es-AR" xmlns:th="https://wwww.thymeleaf.org">
+    <head th:replace="/fragments/head :: head">
+        
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="@{/}">CREAR EDITORIAL</a>
+            </div>
+        </nav>
+        <button><a th:href="@{/editorial/list}">Ver lista de editoriales</a></button>
+        <br>
+        <form th:action="@{/editorial/save}" method="POST">
+            <div>Crear Editorial</div>
+            <label>Id</label>
+            <input type="text" name="id">
+            <br>
+            <label>Nombre</label>
+            <input type="text" name="nombre">
+            <br>
+            <input type="submit">
+        </form>
+    </body>
+</html>
